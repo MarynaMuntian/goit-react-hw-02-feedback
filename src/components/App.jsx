@@ -1,5 +1,6 @@
 import React from 'react';
 import { Statistics } from './Statistics/Statistics';
+import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
 
 export class App extends React.Component {
   state = {
@@ -8,21 +9,9 @@ export class App extends React.Component {
     bad: 0,
   };
 
-  addGood = () => {
+  addFeedback = type => {
     this.setState(prevState => {
-      return { good: prevState.good + 1 };
-    });
-  };
-
-  addNeutral = () => {
-    this.setState(prevState => {
-      return { neutral: prevState.neutral + 1 };
-    });
-  };
-
-  addBad = () => {
-    this.setState(prevState => {
-      return { bad: prevState.bad + 1 };
+      return { [type]: prevState[type] + 1 };
     });
   };
 
@@ -40,15 +29,13 @@ export class App extends React.Component {
     return (
       <div>
         <h1>Please leave feedback</h1>
-        <button type="button" onClick={this.addGood}>
-          Good
-        </button>
-        <button type="button" onClick={this.addNeutral}>
-          Neutral
-        </button>
-        <button type="button" onClick={this.addBad}>
-          Bad
-        </button>
+        <FeedbackOptions
+          options={['good', 'neutral', 'bad']}
+          onLeaveFeedback={() => {
+            this.addFeedback();
+          }}
+        />
+
         <h2>Statistics</h2>
         <Statistics
           good={this.state.good}
