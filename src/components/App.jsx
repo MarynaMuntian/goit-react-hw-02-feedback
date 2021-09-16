@@ -31,10 +31,8 @@ export class App extends React.Component {
         <h1>Please leave feedback</h1>
         <FeedbackOptions
           options={['good', 'neutral', 'bad']}
-          onLeaveFeedback={() => {
-            this.addFeedback();
-          }}
-        />
+          onLeaveFeedback={this.addFeedback}
+        ></FeedbackOptions>
 
         <h2>Statistics</h2>
         <Statistics
